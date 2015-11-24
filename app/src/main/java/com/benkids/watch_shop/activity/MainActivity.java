@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.benkids.watch_shop.R;
 import com.benkids.watch_shop.fragment.HomeFragment;
 import com.benkids.watch_shop.fragment.Select_table;
+import com.benkids.watch_shop.utils.FragmentUtils;
 
 public class MainActivity extends FragmentActivity {
     private RadioGroup tab_rg;
@@ -22,14 +23,21 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initFragment();
         radioGroupListener();
     }
-
     /**
      * 初始化控件
      */
     public void initView(){
         tab_rg = (RadioGroup) findViewById(R.id.rg_tab);
+    }
+    public void initFragment(){
+        select_table = new Select_table();
+        addFragment(select_table);
+        fg_home = new HomeFragment();
+        lastFragment = fg_home;
+        addFragment(fg_home);
     }
 
     /**
@@ -39,48 +47,23 @@ public class MainActivity extends FragmentActivity {
         tab_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                hideFragment(lastFragment);
-                switch (checkedId) {
-                    case R.id.rb_home:
-                        getHomeFragmentInstance();
-                        showFragment(fg_home);
-                        break;
-                    case R.id.rb_choose_watch:
-                        getTableFragmentInstance();
-                        showFragment(select_table);
-                        break;
-                    case R.id.rb_shop:
-                        break;
-                    case R.id.rb_mine:
-                        break;
-                }
+                selectFragment(checkedId);
             }
         });
     }
-    //home/
-    public void getHomeFragmentInstance(){
-       if(fg_home == null){
-           fg_home = new HomeFragment();
-           addFragment(fg_home);
-       }
-    }
-    // 选表fragment判断
-    public void getTableFragmentInstance(){
-        if(select_table == null){
-            select_table = new Select_table();
-            addFragment(select_table);
-        }
-    }
-
-    public void hideFragment(Fragment fg){
-        if(fg != null) {
-            getSupportFragmentManager().beginTransaction().hide(fg).commit();
-        }
-    }
-    public void showFragment(Fragment fg){
-        if(fg != null) {
-            getSupportFragmentManager().beginTransaction().show(fg).commit();
-            lastFragment = fg;
+    public void selectFragment(int checkedId){
+        FragmentUtils.hideFragment(lastFragment,getSupportFragmentManager());
+        switch (checkedId) {
+            case R.id.rb_home:
+               lastFragment = FragmentUtils.showFragment(fg_home,getSupportFragmentManager());
+                break;
+            case R.id.rb_choose_watch:
+                lastFragment = FragmentUtils.showFragment(select_table,getSupportFragmentManager());
+                break;
+            case R.id.rb_shop:
+                break;
+            case R.id.rb_mine:
+                break;
         }
     }
 
@@ -92,6 +75,5 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fl_fg_layouts, fg);
         transaction.commit();
-        Toast.makeText(this,"addFragment()",Toast.LENGTH_SHORT).show();
     }
 }
