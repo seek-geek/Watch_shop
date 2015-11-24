@@ -9,10 +9,13 @@ import android.widget.Toast;
 
 import com.benkids.watch_shop.R;
 import com.benkids.watch_shop.fragment.HomeFragment;
+import com.benkids.watch_shop.fragment.Select_table;
 
 public class MainActivity extends FragmentActivity {
     private RadioGroup tab_rg;
     private HomeFragment fg_home = null;
+    private Select_table select_table = null;
+
     Fragment lastFragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,8 @@ public class MainActivity extends FragmentActivity {
                         showFragment(fg_home);
                         break;
                     case R.id.rb_choose_watch:
-
+                        getTableFragmentInstance();
+                        showFragment(select_table);
                         break;
                     case R.id.rb_shop:
                         break;
@@ -53,12 +57,21 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
+    ///////
     public void getHomeFragmentInstance(){
        if(fg_home == null){
            fg_home = new HomeFragment();
            addFragment(fg_home);
        }
     }
+    // 选表fragment判断
+    public void getTableFragmentInstance(){
+        if(select_table == null){
+            select_table = new Select_table();
+            addFragment(select_table);
+        }
+    }
+
     public void hideFragment(Fragment fg){
         if(fg != null) {
             getSupportFragmentManager().beginTransaction().hide(fg).commit();
