@@ -11,14 +11,10 @@ import com.benkids.watch_shop.R;
 /**
  * Created by joney on 2015/11/23.
  */
-public class Select_table extends Fragment {
+public class hotFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_choosetable,null);
-
-
-
-
+        View view = inflater.inflate(R.layout.fragment_table_hot,null);
         return view;
     }
 }
