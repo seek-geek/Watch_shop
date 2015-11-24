@@ -6,6 +6,7 @@ package com.benkids.watch_shop.utils;
 public interface Constants {
 
     interface URL{
+
     }
 
     interface BUNDLE_KEY{

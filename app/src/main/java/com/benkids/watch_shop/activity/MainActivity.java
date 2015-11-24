@@ -35,6 +35,7 @@ public class MainActivity extends FragmentActivity {
     /**
      * 判断选择了哪个RadioButton
      */
+    //
     public void radioGroupListener(){
         tab_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
