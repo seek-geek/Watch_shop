@@ -57,7 +57,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
-    //home
+    //home/
     public void getHomeFragmentInstance(){
        if(fg_home == null){
            fg_home = new HomeFragment();
