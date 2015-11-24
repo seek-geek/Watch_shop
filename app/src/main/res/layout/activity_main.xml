@@ -24,10 +24,10 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:button="@null"
+            android:checked="true"
             android:background="#F1F1F1"
             android:drawableTop="@drawable/tab_home_selector"
             android:textColor="@drawable/tab_textcolor_selector"
-            android:checked="true"
             android:text="首页"/>
         <RadioButton
             android:id="@+id/rb_choose_watch"

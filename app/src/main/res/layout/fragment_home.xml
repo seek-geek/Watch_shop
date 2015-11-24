@@ -4,11 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-
-    <Button
+    <ListView
+        android:id="@+id/lv_home_fg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>
