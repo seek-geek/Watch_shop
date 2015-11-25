@@ -5,14 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import com.benkids.watch_shop.R;
 import com.benkids.watch_shop.fragment.HomeFragment;
 import com.benkids.watch_shop.fragment.Select_table;
 import com.benkids.watch_shop.utils.FragmentUtils;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity{
     private RadioGroup tab_rg;
     private HomeFragment fg_home = null;
     private Select_table select_table = null;
@@ -35,9 +33,10 @@ public class MainActivity extends FragmentActivity {
     public void initFragment(){
         select_table = new Select_table();
         addFragment(select_table);
+        FragmentUtils.hideFragment(select_table, getSupportFragmentManager());
         fg_home = new HomeFragment();
-        lastFragment = fg_home;
         addFragment(fg_home);
+        lastFragment = fg_home;
     }
 
     /**
@@ -76,4 +75,5 @@ public class MainActivity extends FragmentActivity {
         transaction.add(R.id.fl_fg_layouts, fg);
         transaction.commit();
     }
+
 }

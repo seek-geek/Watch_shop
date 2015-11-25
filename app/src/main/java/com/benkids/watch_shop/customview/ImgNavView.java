@@ -8,10 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.benkids.watch_shop.R;
-
-/**
- *
- */
 public class ImgNavView extends LinearLayout{
 
     private int count;
