@@ -9,12 +9,119 @@
         <LinearLayout
             android:id="@+id/fl_home_fg_layouts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <com.benkids.watch_shop.customview.HeadNavView
                 android:id="@+id/hnv_home_fg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </com.benkids.watch_shop.customview.HeadNavView>
+            <LinearLayout
+                android:id="@+id/linear_home_menu_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/xuanbiao2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="选表中心"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/shangou2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="闪购"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/shouji2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="手机专享"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/biaoyouhui2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="表友惠"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_home_menu_02"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/shangwuguan2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="商务馆"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/shishangguan2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="时尚馆"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/yundongguan2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="运动馆"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/libao2"
+                    android:background="#00000000"
+                    android:textSize="10dp"
+                    android:text="推荐有礼"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_head_discount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:scaleType="fitXY"
+                android:background="#DDDFCA"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_watch_discount_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/iv_watch_discount_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_watch_discount_01"
+                    android:layout_centerHorizontal="true"/>
+                <ImageView
+                    android:id="@+id/iv_watch_discount_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_watch_discount_02"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
     <LinearLayout
