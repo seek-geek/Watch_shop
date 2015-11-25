@@ -12,6 +12,8 @@ public interface Constants {
         //选表hot——标签
         String TABLE_HOTTag_URL = "http://wb.app.wbiao.cn/v1/xuanbiao/hottags";
         String TABLE_HOTBRANDS_URL = "http://wb.app.wbiao.cn/v1/xuanbiao/hotbrands";
+
+        public static final  String tableotherUrl = "http://wb.app.wbiao.cn/v1/xuanbiao/brands?sign=29f25f871e3bf69979543ee2503aa794&type=grade";
     }
 
     interface BUNDLE_KEY{
