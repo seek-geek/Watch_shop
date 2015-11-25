@@ -45,7 +45,9 @@
             android:button="@null"
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
+            android:textColor="@drawable/tab_tablecolor_selector"
             android:text="热门"
+            android:checked="true"
             />
         <RadioButton
             android:id="@+id/rb_dingji"
@@ -54,8 +56,9 @@
             android:button="@null"
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
+            android:textColor="@drawable/tab_tablecolor_selector"
             android:text="顶级"
-            />
+             />
         <RadioButton
             android:id="@+id/rb_shehua"
             android:layout_width="wrap_content"
@@ -64,6 +67,7 @@
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
             android:text="奢华"
+            android:textColor="@drawable/tab_tablecolor_selector"
             />
         <RadioButton
             android:id="@+id/rb_qingshe"
@@ -73,6 +77,7 @@
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
             android:text="轻奢"
+            android:textColor="@drawable/tab_tablecolor_selector"
             />
         <RadioButton
             android:id="@+id/rb_shishang"
@@ -82,6 +87,7 @@
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
             android:text="时尚"
+            android:textColor="@drawable/tab_tablecolor_selector"
             />
     </RadioGroup>
     <TextView
@@ -92,6 +98,7 @@
         android:layout_below="@+id/rl_re_layout"
         android:background="#000"/>
     <FrameLayout
+        android:id="@+id/framlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/t1"

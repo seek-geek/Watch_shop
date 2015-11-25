@@ -1,6 +1,7 @@
 package com.benkids.watch_shop.utils;
 
 import com.benkids.watch_shop.model.AdvertisementEntity;
+import com.benkids.watch_shop.model.HotbrandsEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,5 +38,25 @@ public class JSONUtil {
             e.printStackTrace();
         }
         return null;
+    }
+    public static List<HotbrandsEntity> parseHotJson(String json){
+        List<HotbrandsEntity> list = new ArrayList<>();
+        HotbrandsEntity entity = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("data");
+            for(int i = 0;i < array.length(); i ++) {
+                entity = new HotbrandsEntity();
+                object = array.getJSONObject(i);
+                entity.setId(object.getInt("brand_level_id"));
+                entity.setLog0(object.getString("brand_logo"));
+                entity.setName(object.getString("brand_name"));
+                list.add(entity);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  null;
     }
 }

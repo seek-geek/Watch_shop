@@ -36,6 +36,9 @@
             android:background="#000"
             />
         <GridView
+            android:layout_marginTop="20dp"
+            android:horizontalSpacing="20dp"
+            android:verticalSpacing="20dp"
             android:numColumns="2"
             android:id="@+id/gv_brands"
             android:layout_width="match_parent"
