@@ -1,10 +1,12 @@
 package com.benkids.watch_shop.customview;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.FragmentManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,10 @@ import com.benkids.watch_shop.utils.Constants;
 import com.benkids.watch_shop.utils.JSONUtil;
 import com.benkids.watch_shop.utils.VolleyUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -28,6 +33,7 @@ public class HeadNavView extends FrameLayout implements VolleyUtil.OnRequest, Vi
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private ImgNavView inv;
+    List<AdvertisementEntity> list;
 
 
     public HeadNavView(Context context) {
@@ -35,25 +41,22 @@ public class HeadNavView extends FrameLayout implements VolleyUtil.OnRequest, Vi
         init();
     }
 
-    private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.custem_navview, this, true);
-        viewPager = (ViewPager) this.findViewById(R.id.vp_head);
-        viewPager.setOnPageChangeListener(this);
-
-        inv = (ImgNavView) findViewById(R.id.inv_id);
+    public HeadNavView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
     }
 
+    private void init() {
+        LayoutInflater.from(getContext()).inflate(R.layout.custem_adview, this, true);
+        viewPager = (ViewPager) this.findViewById(R.id.vp_ad);
+        viewPager.setOnPageChangeListener(this);
+        inv = (ImgNavView) findViewById(R.id.inv_id);
+    }
     /**
      *
-     * @param cityid
      */
-    public void loadData(){
-        /*if(cityid > 0){
-            String url = String.format(Constants.URL.HOME_HEAD_URL, cityid);
-            VolleyUtil.requestString(url, this);
-        }*/
-
-        VolleyUtil.requestString(Constants.URL.AD_IMAGE_URL,this);
+    public void loadData() {
+        VolleyUtil.requestString(Constants.URL.AD_IMAGE_URL, this);
     }
 
 
@@ -63,37 +66,72 @@ public class HeadNavView extends FrameLayout implements VolleyUtil.OnRequest, Vi
      */
     @Override
     public void response(String url, String response) {
-        /*List<HeadNavEntity> datas = JSONUtil.getHeadNavByJSON(response);
-        inv.setCount(datas.size());
-        viewPagerAdapter = new ViewPagerAdapter(fm, datas);
-        viewPager.setAdapter(viewPagerAdapter);*/
-        List<AdvertisementEntity> list = JSONUtil.parseAdJson(response);
+
+        list = JSONUtil.parseAdJson(response);
         inv.setCount(list.size());
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
         downloadImage(list);
     }
+
     @Override
     public void errorResponse(String url, VolleyError error) {
 
     }
-    public void downloadImage(List<AdvertisementEntity> list){
-        for(int i = 0;i < list.size(); i ++){
 
+    public void downloadImage(List<AdvertisementEntity> list) {
+        List<ImageView> images = new ArrayList<ImageView>();
+        ImageView iv = null;
+        for (int i = 0; i < list.size(); i++) {
+            iv = new ImageView(getContext());
+            VolleyUtil.requestImage(list.get(i).getAd_image(), iv, R.mipmap.ad_home_default_image, R.mipmap.ad_home_default_image);
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            images.add(iv);
         }
+        viewPagerAdapter.setData(images);
+        headNavViewCarousel();
+    }
+
+    public void headNavViewCarousel(){
+        final Handler handler = new Handler(){
+            int imageCount = list.size();
+            int currentIndex = 0;
+            public void handleMessage(Message msg){
+                if(imageCount <= currentIndex){
+                    currentIndex = 0;
+                }else {
+                    currentIndex ++;
+                }
+
+                if(0 == currentIndex){
+                    viewPager.setCurrentItem(currentIndex,false);
+                }else {
+                    viewPager.setCurrentItem(currentIndex);
+                }
+            }
+        };
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                handler.sendEmptyMessage(0);
+            }
+        }, 3000, 3000);
     }
     /**
      * FragmentStatePagerAdapter
      * FragmentPagerAdapter
      */
-    class ViewPagerAdapter extends PagerAdapter{
-    private List<ImageView> list = null;
-        public ViewPagerAdapter(){
+    class ViewPagerAdapter extends PagerAdapter {
+        private List<ImageView> list = new ArrayList<ImageView>();
+
+        public ViewPagerAdapter() {
+            super();
         }
-        public void setData(List<ImageView> list){
+
+        public void setData(List<ImageView> list) {
             this.list = list;
             this.notifyDataSetChanged();
         }
+
         @Override
         public int getCount() {
             return list.size();
@@ -114,26 +152,7 @@ public class HeadNavView extends FrameLayout implements VolleyUtil.OnRequest, Vi
             container.addView(list.get(position));
             return list.get(position);
         }
-        /*private List<HeadNavEntity> datas;
-
-        public ViewPagerAdapter(FragmentManager fm, List<HeadNavEntity> datas) {
-            super(fm);
-            this.datas = datas;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            HeadNavFragment headNavFragment = HeadNavFragment.getInstance(datas.get(position));
-            return headNavFragment;
-        }
-
-        @Override
-        public int getCount() {
-            return datas.size();
-        }*/
     }
-
-
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
