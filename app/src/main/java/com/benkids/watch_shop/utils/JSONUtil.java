@@ -1,6 +1,7 @@
 package com.benkids.watch_shop.utils;
 
 import com.benkids.watch_shop.model.AdvertisementEntity;
+import com.benkids.watch_shop.model.HotTagEntity;
 import com.benkids.watch_shop.model.HotbrandsEntity;
 import com.benkids.watch_shop.model.HomeDiscountEntity;
 import com.benkids.watch_shop.model.HomeMenuEntity;
