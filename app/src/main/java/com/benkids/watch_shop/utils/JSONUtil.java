@@ -1,7 +1,6 @@
 package com.benkids.watch_shop.utils;
 
 import com.benkids.watch_shop.model.AdvertisementEntity;
-import com.benkids.watch_shop.model.HotbrandsEntity;
 import com.benkids.watch_shop.model.HomeDiscountEntity;
 import com.benkids.watch_shop.model.HomeMenuEntity;
 
@@ -35,6 +34,64 @@ public class JSONUtil {
                 entity.setAd_image(object.getString("ad_image"));
                 list.add(entity);
             }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 解析首页菜单数据
+     * @param json
+     * @return
+     */
+    public static List<HomeMenuEntity> parseMenuJson(String json){
+        List<HomeMenuEntity> list = new ArrayList<HomeMenuEntity>();
+        HomeMenuEntity homeMenu = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("data");
+            for(int i = 0;i < array.length(); i ++){
+                homeMenu = new HomeMenuEntity();
+                object = array.getJSONObject(i);
+                homeMenu.setImage(object.getString("image"));
+                homeMenu.setName(object.getString("name"));
+                list.add(homeMenu);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 解析首页菜单数据
+     * @param json
+     * @return
+     */
+    public static List<HomeDiscountEntity> parseDiscountJson(String json){
+        List<HomeDiscountEntity> list = new ArrayList<HomeDiscountEntity>();
+        HomeDiscountEntity discountEntity = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            object = object.getJSONObject("data");
+            JSONArray array = object.getJSONArray("goods");
+            for (int i = 0;i < array.length();i ++){
+                discountEntity = new HomeDiscountEntity();
+                JSONObject dataJson = array.getJSONObject(i);
+                discountEntity.setImage(dataJson.getString("image"));
+                discountEntity.setBegin_time(dataJson.getString("begin_time"));
+                discountEntity.setEnd_time(dataJson.getString("end_time"));
+                discountEntity.setOnline_price(dataJson.getString("online_price"));
+                discountEntity.setShow_title(dataJson.getString("show_title"));
+                discountEntity.setWb_url(dataJson.getString("wb_url"));
+                list.add(discountEntity);
+            }
+            object = object.getJSONObject("banner");
+            HomeDiscountEntity.head_image = object.getString("image");
+            HomeDiscountEntity.href = object.getString("href");
             return list;
         } catch (JSONException e) {
             e.printStackTrace();
