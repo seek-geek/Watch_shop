@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.benkids.watch_shop.R;
+import com.benkids.watch_shop.adapter.AdapterHotTag;
 import com.benkids.watch_shop.adapter.Adapter_pinpao;
+import com.benkids.watch_shop.model.HotTagEntity;
 import com.benkids.watch_shop.model.HotbrandsEntity;
 import com.benkids.watch_shop.utils.Constants;
 import com.benkids.watch_shop.utils.JSONUtil;
@@ -25,6 +28,7 @@ public class TableHotFragment extends Fragment implements VolleyUtil.OnRequest {
     private GridView gv_brands;
     private GridView gv_tag;
     private Adapter_pinpao adapter;
+    private AdapterHotTag adapterHotTag;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table_hot, null);
@@ -35,6 +39,7 @@ public class TableHotFragment extends Fragment implements VolleyUtil.OnRequest {
     //下载数据
     private void loadmsg() {
         VolleyUtil.requestString(Constants.URL.TABLE_HOTBRANDS_URL,this);
+        VolleyUtil.requestString(Constants.URL.TABLE_HOTTag_URL,this);
     }
 
     private void init(View view) {
@@ -43,16 +48,26 @@ public class TableHotFragment extends Fragment implements VolleyUtil.OnRequest {
         //适配器适配
         adapter = new Adapter_pinpao(getActivity());
         gv_brands.setAdapter(adapter);
+
+        adapterHotTag = new AdapterHotTag(getActivity());
+        gv_tag.setAdapter(adapterHotTag);
+
+
+
     }
 
 
     //下载数据成功后执行的操作
     @Override
     public void response(String url, String response) {
-        List<HotbrandsEntity> data = JSONUtil.parseHotJson(response);
-        adapter.setDatas(data);
-
-
+        if(url.equals(Constants.URL.TABLE_HOTBRANDS_URL)){
+            List<HotbrandsEntity> data = JSONUtil.parseHotJson(response);
+            adapter.setDatas(data);
+        }
+        if (url.equals(Constants.URL.TABLE_HOTTag_URL)){
+            List<HotTagEntity> data2 = JSONUtil.parseHotTag(response);
+            adapterHotTag.setDatas(data2);
+        }
     }
 
     @Override

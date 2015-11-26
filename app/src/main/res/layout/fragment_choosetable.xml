@@ -33,7 +33,7 @@
     </RelativeLayout>
     <RadioGroup
         android:id="@+id/rg_select"
-        android:layout_width="120dp"
+        android:layout_width="80dp"
         android:layout_below="@+id/rl_re_layout"
         android:layout_height="match_parent"
         android:orientation="vertical"
