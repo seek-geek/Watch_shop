@@ -6,7 +6,7 @@ package com.benkids.watch_shop.model;
 public class HomeMenuEntity {
     private String name;
     private String image;
-
+//
     public String getName() {
         return name;
     }
