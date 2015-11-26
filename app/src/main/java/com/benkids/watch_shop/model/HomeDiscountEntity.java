@@ -12,7 +12,7 @@ public class HomeDiscountEntity {
     private String online_price;
     public static String head_image;
     public static String href;
-//
+
     public String getBegin_time() {
         return begin_time;
     }

@@ -21,7 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:numColumns="3"
-            android:layout_weight="1"></GridView>
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:horizontalSpacing="20dp"
+            android:verticalSpacing="20dp"></GridView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

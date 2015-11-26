@@ -56,17 +56,6 @@ public class Select_table extends Fragment implements RadioGroup.OnCheckedChange
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         FragmentUtils.hideFragment(lastFragment, getFragmentManager());
-       /* switch (i) {
-            case R.id.rb_hot:
-                lastFragment = FragmentUtils.showFragment(hotFragment, getFragmentManager());
-                break;
-            case R.id.rb_dingji:
-                lastFragment = FragmentUtils.showFragment(tableOtherFragment, getFragmentManager());
-                break;
-            case R.id.rb_shehua:
-                break;
-            case R.id.rb_qingshe:
-                break;*/
         if(i == R.id.rb_hot){
             lastFragment = FragmentUtils.showFragment(hotFragment, getFragmentManager());
         }else{
