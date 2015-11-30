@@ -1,10 +1,16 @@
 package com.benkids.watch_shop.utils;
 
+import android.util.Log;
+
 import com.benkids.watch_shop.model.AdvertisementEntity;
+import com.benkids.watch_shop.model.HomeAboutWatch;
+import com.benkids.watch_shop.model.HomeSelectionShowEntity;
+import com.benkids.watch_shop.model.HomeWatchListEntity;
 import com.benkids.watch_shop.model.HotTagEntity;
 import com.benkids.watch_shop.model.HotbrandsEntity;
 import com.benkids.watch_shop.model.HomeDiscountEntity;
 import com.benkids.watch_shop.model.HomeMenuEntity;
+import com.benkids.watch_shop.model.SelectWatchEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,6 +115,7 @@ public class JSONUtil {
                 object = array.getJSONObject(i);
                 homeMenu.setImage(object.getString("image"));
                 homeMenu.setName(object.getString("name"));
+                homeMenu.setHref(object.getString("href"));
                 list.add(homeMenu);
             }
             return list;
@@ -144,6 +151,108 @@ public class JSONUtil {
             object = object.getJSONObject("banner");
             HomeDiscountEntity.head_image = object.getString("image");
             HomeDiscountEntity.href = object.getString("href");
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 解析选表数据
+     */
+    public static List<SelectWatchEntity> parseSelectWatchJson(String json){
+        List<SelectWatchEntity> list = new ArrayList<SelectWatchEntity>();
+        SelectWatchEntity selectWatchEntity = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("data");
+            for(int i = 0;i < array.length();i ++){
+                selectWatchEntity = new SelectWatchEntity();
+                object = array.getJSONObject(i);
+                selectWatchEntity.setImage(object.getString("image"));
+                selectWatchEntity.setTitle(object.getString("title"));
+                list.add(selectWatchEntity);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 解析精选手表数据
+     */
+    public static List<HomeSelectionShowEntity> parseSelectionShowJson(String json){
+        List<HomeSelectionShowEntity> list = new ArrayList<HomeSelectionShowEntity>();
+        HomeSelectionShowEntity selectionShowEntity = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            object = object.getJSONObject("data");
+            JSONArray array01 = object.getJSONArray("banners");
+            JSONArray array02 = object.getJSONArray("goods");
+            for(int i = 0;i < array01.length();i ++){
+                selectionShowEntity = new HomeSelectionShowEntity();
+                object = array01.getJSONObject(i);
+                selectionShowEntity.setImage(object.getString("image"));
+                selectionShowEntity.setHref(object.getString("href"));
+                list.add(selectionShowEntity);
+            }
+            for(int i = 0;i < array02.length();i ++){
+                selectionShowEntity = new HomeSelectionShowEntity();
+                object = array02.getJSONObject(i);
+                selectionShowEntity.setImage(object.getString("image"));
+                selectionShowEntity.setHref(object.getString("href"));
+                selectionShowEntity.setBrand_name(object.getString("brand_name"));
+                selectionShowEntity.setGoods_price(object.getString("goods_price"));
+                list.add(selectionShowEntity);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 解析精选手表列表数据
+     */
+    public static List<HomeWatchListEntity> parseWatchListJson(String json){
+        List<HomeWatchListEntity> list = new ArrayList<HomeWatchListEntity>();
+        HomeWatchListEntity watchListEntity = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("data");
+            for(int i = 0;i < array.length();i ++){
+                watchListEntity = new HomeWatchListEntity();
+                object = array.getJSONObject(i);
+                watchListEntity.setHref(object.getString("href"));
+                watchListEntity.setImage(object.getString("image"));
+                list.add(watchListEntity);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 解析首页关于万表数据
+     */
+    public static List<HomeAboutWatch> parseAboutWatchJson(String json){
+        List<HomeAboutWatch> list = new ArrayList<HomeAboutWatch>();
+        HomeAboutWatch aboutWatch = null;
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("data");
+            for(int i = 0;i < array.length();i ++){
+                object = array.getJSONObject(i);
+                aboutWatch = new HomeAboutWatch();
+                aboutWatch.setImage(object.getString("image"));
+                aboutWatch.setHref(object.getString("href"));
+                aboutWatch.setSubtitle(object.getString("subtitle"));
+                aboutWatch.setTitle(object.getString("title"));
+                list.add(aboutWatch);
+            }
             return list;
         } catch (JSONException e) {
             e.printStackTrace();

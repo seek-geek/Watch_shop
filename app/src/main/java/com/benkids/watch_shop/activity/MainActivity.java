@@ -1,6 +1,8 @@
 package com.benkids.watch_shop.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -16,8 +18,8 @@ public class MainActivity extends FragmentActivity {
     private RadioGroup tab_rg;
     private HomeFragment fg_home = null;
     private Select_table select_table = null;
-
-    Fragment lastFragment = null;
+    private Fragment lastFragment = null;
+    private Handler checkedHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class MainActivity extends FragmentActivity {
         fg_home = new HomeFragment();
         lastFragment = fg_home;
         addFragment(fg_home);
+        initHandler();
     }
 
     /**
@@ -59,7 +62,7 @@ public class MainActivity extends FragmentActivity {
                 break;
             case R.id.rb_choose_watch:
                 lastFragment = FragmentUtils.showFragment(select_table,getSupportFragmentManager());
-                break;
+            break;
             case R.id.rb_shop:
                 break;
             case R.id.rb_mine:
@@ -75,5 +78,16 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fl_fg_layouts, fg);
         transaction.commit();
+    }
+    public void initHandler() {
+        checkedHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.arg1 == 1001) {
+                    tab_rg.getChildAt(1).performClick();
+                }
+            }
+        };
+        fg_home.initHandler(checkedHandler);
     }
 }

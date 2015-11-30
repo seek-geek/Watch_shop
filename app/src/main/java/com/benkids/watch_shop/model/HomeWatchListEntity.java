@@ -1,12 +1,11 @@
 package com.benkids.watch_shop.model;
 
 /**
- * Created by Administrator on 2015/11/25.
+ * Created by Administrator on 2015/11/27.
  */
-public class HomeMenuEntity {
-    private String name;
-    private String image;
+public class HomeWatchListEntity {
     private String href;
+    private String image;
 
     public String getHref() {
         return href;
@@ -14,15 +13,6 @@ public class HomeMenuEntity {
 
     public void setHref(String href) {
         this.href = href;
-    }
-
-    //
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getImage() {
